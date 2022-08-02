@@ -10,6 +10,15 @@ class ReceitaController {
             next(erro);
         }
     }
+    static async pegaUmaReceita(req, res, next) {
+        const { id } = req.params;
+        try {
+            const receitaDetalhada = await receitaServices.pegaUmRegistro(id);
+            return res.status(200).json(receitaDetalhada);
+        } catch (erro) {
+            next(erro);
+        }
+    }
     static async cadastraReceita(req, res, next) {
        const novaReceita = req.body;
        try {
