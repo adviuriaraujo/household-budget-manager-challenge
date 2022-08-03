@@ -51,9 +51,18 @@ class ReceitaController {
             }
             await receitaServices.atualizaRegistro(dadosAtualizados, id);
             const receitaAtualizada = await receitaServices.pegaUmRegistro(id);
-            return res.status(200).json(receitaAtualizada)
+            return res.status(200).json(receitaAtualizada);
         } catch (erro) {
-           next(erro) 
+           next(erro); 
+        }
+    }
+    static async removeReceita(req, res, next) {
+        try {
+            const { id } = req.params;
+            await receitaServices.removeRegistro(id);
+            return res.status(200).json({ mensagem: `Receita de id ${id} removida com sucesso!` });
+        } catch (erro) {
+            next(erro);
         }
     }
 };

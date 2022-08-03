@@ -27,6 +27,14 @@ class Services {
     async atualizaRegistro(dadosAtualizados, id) {
         return database[this.nomeDoModelo].update(dadosAtualizados, { where: { id: id } });
     }
+    async removeRegistro(id) {
+        const registroEncontrado = await database[this.nomeDoModelo].findOne({
+            attributes: ['descricao', 'valor', 'data'],
+            where: { id: id }
+        });
+        if (!registroEncontrado) throw new NaoEncontradoError(id);
+        return database[this.nomeDoModelo].destroy({ where: { id: id } });
+    }
 }
 
 module.exports = Services;
