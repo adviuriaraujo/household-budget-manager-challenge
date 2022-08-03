@@ -11,6 +11,27 @@ class DespesaController {
             next(erro);
         }
     }
+
+    static async pegaUmaDespesa(req, res, next) {
+        try {
+            const { id } = req.params;
+            const despesaDetalhada = await despesaServices.pegaUmRegistro(id);
+            return res.status(200).json(despesaDetalhada);
+        } catch (erro) {
+            next(erro);
+        }
+    }
+
+    static async cadastraDespesa(req, res, next) {
+        try {
+            const novaDespesa = req.body;
+            await despesaServices.verificaDespesasDuplicadas(novaDespesa);
+            const novaDespesaCadastrada = await despesaServices.criaRegistro(novaDespesa);
+            return res.status(201).json(novaDespesaCadastrada);
+        } catch (erro) {
+            next(erro);
+        }
+    }
 }
 
 module.exports = { DespesaController };
