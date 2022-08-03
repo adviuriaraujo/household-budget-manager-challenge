@@ -7,5 +7,6 @@ router
     .get('/receitas', ReceitaController.pegaTodasReceitas)
     .get('/receitas/:id', ReceitaController.pegaUmaReceita)
     .post('/receitas', ReceitaController.cadastraReceita)
+    .put('/receitas/:id', ReceitaController.atualizaReceita)
 
 module.exports = router;

@@ -11,8 +11,8 @@ class ReceitaController {
         }
     }
     static async pegaUmaReceita(req, res, next) {
-        const { id } = req.params;
         try {
+            const { id } = req.params;
             const receitaDetalhada = await receitaServices.pegaUmRegistro(id);
             return res.status(200).json(receitaDetalhada);
         } catch (erro) {
@@ -28,6 +28,33 @@ class ReceitaController {
        } catch (erro) {
         next(erro);
        } 
+    }
+    static async atualizaReceita(req, res, next) {
+        try {
+            const { id } = req.params;
+            const dadosAtualizados = req.body;
+            const receitaCadastrada = await receitaServices.pegaUmRegistro(id);
+            if (dadosAtualizados.data && dadosAtualizados.descricao) {
+                await receitaServices.verificaReceitasDuplicadas(dadosAtualizados, id);
+            }
+            if (dadosAtualizados.data && !dadosAtualizados.descricao) {
+                await receitaServices.verificaReceitasDuplicadas({
+                    descricao: receitaCadastrada.descricao,
+                    data: dadosAtualizados.data,
+                }, id);
+            }
+            if (!dadosAtualizados.data && dadosAtualizados.descricao) {
+                await receitaServices.verificaReceitasDuplicadas({
+                    descricao: dadosAtualizados.descricao,
+                    data: receitaCadastrada.data,
+                }, id);
+            }
+            await receitaServices.atualizaRegistro(dadosAtualizados, id);
+            const receitaAtualizada = await receitaServices.pegaUmRegistro(id);
+            return res.status(200).json(receitaAtualizada)
+        } catch (erro) {
+           next(erro) 
+        }
     }
 };
 
