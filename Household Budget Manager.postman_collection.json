@@ -1,0 +1,1295 @@
+{
+	"info": {
+		"_postman_id": "76136633-7b87-4ce2-8c63-e851d9250e75",
+		"name": "Household Budget Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16151410"
+	},
+	"item": [
+		{
+			"name": "Rotas Receitas",
+			"item": [
+				{
+					"name": "Pega todas receitas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/receitas",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"receitas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Pega todas receitas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/receitas",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "184"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b8-qzxeCuJiTuyc/zPLs2QVqNZqXGo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 03:07:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"descricao\": \"Salário\",\n        \"valor\": 3500.97,\n        \"data\": \"2022-08-01\"\n    },\n    {\n        \"descricao\": \"Salário\",\n        \"valor\": 3500.97,\n        \"data\": \"2022-03-01\"\n    },\n    {\n        \"descricao\": \"Salário\",\n        \"valor\": 3500.97,\n        \"data\": \"2022-02-01\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Pega uma receita",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/receitas/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"receitas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Pega uma receita",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/receitas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-efenst9/kKdBS0ol6o6GRep0P2E\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 02:45:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"descricao\": \"Salário\",\n    \"valor\": 3500.97,\n    \"data\": \"2022-02-01\"\n}"
+						},
+						{
+							"name": "Pega uma receita Erro",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/receitas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-sDlseVeWjZ0WfccQ5HHtJQskBdo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 03:10:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"erro\": \"NaoEncontradoError\",\n    \"mensagem\": \"O registro de id 2 não foi encontrado!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cadastrar nova receita",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\": \"Salário\",\r\n    \"valor\": 3500.97,\r\n    \"data\": \"2022-05-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/receitas",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"receitas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cadastrar nova receita",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descricao\": \"Salário\",\r\n    \"valor\": 3500.97,\r\n    \"data\": \"2022-05-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/receitas",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "145"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"91-EcbYKKkOMUbCKUAfXkguLM1teS8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 03:09:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"descricao\": \"Salário\",\n    \"valor\": 3500.97,\n    \"data\": \"2022-05-01\",\n    \"updatedAt\": \"2022-08-03T03:09:05.311Z\",\n    \"createdAt\": \"2022-08-03T03:09:05.311Z\"\n}"
+						},
+						{
+							"name": "Cadastrar nova receita Erro",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descricao\": \"Salário\",\r\n    \"valor\": 3500.97,\r\n    \"data\": \"2022-08-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/receitas",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"56-ZFurtICH1Z4Hoz9vjk9OqIifcys\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 01:25:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"erro\": \"ParametroInvalidoError\",\n    \"mensagem\": \"Esta receita já existe para este mês!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Atualiza uma receita",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": \"2022-02-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/receitas/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"receitas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Atualiza uma receita",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": \"2022-02-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/receitas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-efenst9/kKdBS0ol6o6GRep0P2E\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 02:48:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"descricao\": \"Salário\",\n    \"valor\": 3500.97,\n    \"data\": \"2022-02-01\"\n}"
+						},
+						{
+							"name": "Atualiza uma receita Erro",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"data\": \"2022-08-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/receitas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"56-ZFurtICH1Z4Hoz9vjk9OqIifcys\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 03:09:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"erro\": \"ParametroInvalidoError\",\n    \"mensagem\": \"Esta receita já existe para este mês!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove uma receita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/receitas/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"receitas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Remove uma receita",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/receitas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-OF0bneWh6Uz55WRlv9JlDrcQuqk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 03:07:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mensagem\": \"Receita de id 2 removida com sucesso!\"\n}"
+						},
+						{
+							"name": "Remove uma receita Erro",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/receitas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"receitas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-sDlseVeWjZ0WfccQ5HHtJQskBdo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 03:10:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"erro\": \"NaoEncontradoError\",\n    \"mensagem\": \"O registro de id 2 não foi encontrado!\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Rotas Despesas",
+			"item": [
+				{
+					"name": "Pega todas despesas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/despesas",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"despesas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Pega todas despesas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/despesas",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"despesas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"41-jXTG5yLbEzJk6a/0nJ2d5euDPig\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 12:12:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"descricao\": \"Conta de luz\",\n        \"valor\": 300.97,\n        \"data\": \"2022-05-01\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Pega uma despesa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/despesas/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"despesas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Pega uma despesa",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/despesas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"despesas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-RFMq3CBb+A4AEGCykS9qHcCoZj8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 12:11:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"descricao\": \"Conta de luz\",\n    \"valor\": 300.97,\n    \"data\": \"2022-05-01\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cadastra nova despesa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\": \"Conta de luz\",\r\n    \"valor\": 300.97,\r\n    \"data\": \"2022-05-08\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/despesas",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"despesas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cadastra nova despesa",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descricao\": \"Conta de luz\",\r\n    \"valor\": 300.97,\r\n    \"data\": \"2022-05-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/despesas",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"despesas"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "148"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"94-A54SOd0r6w84n2pBQj1gz9BzLno\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 12:10:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"descricao\": \"Conta de luz\",\n    \"valor\": 300.97,\n    \"data\": \"2022-05-01\",\n    \"updatedAt\": \"2022-08-03T12:10:47.333Z\",\n    \"createdAt\": \"2022-08-03T12:10:47.333Z\"\n}"
+						},
+						{
+							"name": "Cadastra nova despesa Erro",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descricao\": \"Conta de luz\",\r\n    \"valor\": 300.97,\r\n    \"data\": \"2022-05-08\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/despesas",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"despesas"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"56-i3uMM4EegYqXNsGD2sVtR09JwZY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 12:11:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"erro\": \"ParametroInvalidoError\",\n    \"mensagem\": \"Esta despesa já existe para este mês!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Atualiza uma despesa",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Atualiza uma despesa",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descricao\": \"Conta de luz\",\r\n    \"valor\": 300.97,\r\n    \"data\": \"2022-04-08\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/despesas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"despesas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-s/p26mmFXKg+9Zv9oZXqLPbXB/A\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 21:14:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"descricao\": \"Conta de luz\",\n    \"valor\": 300.97,\n    \"data\": \"2022-04-08\"\n}"
+						},
+						{
+							"name": "Atualiza uma despesa Erro",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"descricao\": \"Conta de luz\",\r\n    \"valor\": 300.97,\r\n    \"data\": \"2022-05-08\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/despesas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"despesas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "86"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"56-i3uMM4EegYqXNsGD2sVtR09JwZY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 21:14:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"erro\": \"ParametroInvalidoError\",\n    \"mensagem\": \"Esta despesa já existe para este mês!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove uma receita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/despesas/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"despesas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Remove uma receita",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/despesas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"despesas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-qTXYCe+eSnVkXQOqT2IBHDFIO6M\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 22:15:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mensagem\": \"Despesa de id 2 removida com sucesso!\"\n}"
+						},
+						{
+							"name": "Remove uma receita Erro",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/despesas/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"despesas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-MXKWZFDMI88xJnYunbyQ4mAz9PQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Aug 2022 22:15:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"erro\": \"NaoEncontradoError\",\n    \"mensagem\": \"O registro de id 5 não foi encontrado!\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
