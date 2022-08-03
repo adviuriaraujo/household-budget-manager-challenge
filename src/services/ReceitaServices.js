@@ -1,7 +1,6 @@
 const { Op } = require('sequelize');
 const Services = require('./Services');
 const { ParametroInvalidoError } = require('../errors');
-const database = require('../models');
 
 class ReceitaServices extends Services {
     constructor() {
