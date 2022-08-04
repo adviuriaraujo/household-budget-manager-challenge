@@ -1,4 +1,6 @@
 const { ReceitaServices } = require('../services');
+const { validaParametrosObrigatorios } = require('../validations/');
+
 const receitaServices = new ReceitaServices();
 
 class ReceitaController {
@@ -12,6 +14,7 @@ class ReceitaController {
     }
     static async pegaUmaReceita(req, res, next) {
         try {
+            validaParametrosObrigatorios(req.params, ['id']);
             const { id } = req.params;
             const receitaDetalhada = await receitaServices.pegaUmRegistro(id);
             return res.status(200).json(receitaDetalhada);
@@ -22,6 +25,8 @@ class ReceitaController {
     static async cadastraReceita(req, res, next) {
        const novaReceita = req.body;
        try {
+        validaParametrosObrigatorios(novaReceita, ['descricao', 'valor', 'data']);
+        novaReceita.descricao = novaReceita.descricao.toLowerCase();
         await receitaServices.verificaReceitasDuplicadas(novaReceita);
         const novaReceitaCadastrada = await receitaServices.criaRegistro(novaReceita);
         return res.status(201).json(novaReceitaCadastrada);
@@ -31,8 +36,12 @@ class ReceitaController {
     }
     static async atualizaReceita(req, res, next) {
         try {
+            validaParametrosObrigatorios({ ...req.params, ...req.body }, ['id', ...Object.keys(req.body)]);
             const { id } = req.params;
             const dadosAtualizados = req.body;
+            if (dadosAtualizados.hasOwnProperty('descricao')) {
+                dadosAtualizados.descricao = dadosAtualizados.descricao.toLowerCase();
+            }
             const receitaCadastrada = await receitaServices.pegaUmRegistro(id);
             if (dadosAtualizados.data && dadosAtualizados.descricao) {
                 await receitaServices.verificaReceitasDuplicadas(dadosAtualizados, id);
@@ -58,6 +67,7 @@ class ReceitaController {
     }
     static async removeReceita(req, res, next) {
         try {
+            validaParametrosObrigatorios(req.params, ['id']);
             const { id } = req.params;
             await receitaServices.removeRegistro(id);
             return res.status(200).json({ mensagem: `Receita de id ${id} removida com sucesso!` });

@@ -13,8 +13,9 @@ class DespesaServices extends Services {
                 { id: { [Op.not]: id }}
             ]
         });
-        const mesDaDespesa = data.substring(5,7);
-        const despesasDuplicadas = despesasComMesmaDescricao.filter(({data}) => data.substring(5,7) === mesDaDespesa);
+        console
+        const mesDaDespesa = data.substring(0,7);
+        const despesasDuplicadas = despesasComMesmaDescricao.filter(({data}) => data.substring(0,7) === mesDaDespesa);
         if (despesasDuplicadas.length > 0) throw new ParametroInvalidoError('Esta despesa já existe para este mês!');
     }
 }
