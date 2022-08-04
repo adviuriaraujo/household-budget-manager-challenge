@@ -1,7 +1,6 @@
 const { Op } = require('sequelize');
 const Services = require('./Services');
 const { ParametroInvalidoError } = require('../errors');
-const database = require('../models');
 
 class ReceitaServices extends Services {
     constructor() {
@@ -14,8 +13,8 @@ class ReceitaServices extends Services {
                 { id: { [Op.not]: id }}
             ]
         });
-        const mesDaReceita = data.substring(5,7);
-        const receitasDuplicadas = receitasComMesmaDescricao.filter(({data}) => data.substring(5,7) === mesDaReceita);
+        const mesDaReceita = data.substring(0,7);
+        const receitasDuplicadas = receitasComMesmaDescricao.filter(({data}) => data.substring(0,7) === mesDaReceita);
         if (receitasDuplicadas.length > 0) throw new ParametroInvalidoError('Esta receita já existe para este mês!');
     }
 }
