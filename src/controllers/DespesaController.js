@@ -17,8 +17,8 @@ class DespesaController {
     static async pegaDespesasPorMes(req, res, next) {
         try {
             validaParametrosObrigatorios(req.params, ['ano', 'mes']);
-            const { ano, mes } = req.params;
-            const despesasPorMes = await despesaServices.pegaRegistrosPorMes(ano, mes);
+            const parametrosDeBusca = despesaServices.validaBuscaDeDespesas({ mensal: req.params });
+            const despesasPorMes = await despesaServices.pegaTodosRegistros(parametrosDeBusca);
             return res.status(200).json(despesasPorMes);
         } catch (erro) {
             next(erro);

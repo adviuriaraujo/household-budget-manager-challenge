@@ -16,6 +16,13 @@ class DespesaServices extends Services {
                     [Op.like]: `%${parametrosDeRequisicao.descricao.toLowerCase()}%`
                 };
             },
+            mensal: () => {
+                const { ano, mes } = parametrosDeRequisicao.mensal;
+                parametrosDeBusca.data = {
+                    [Op.gte]: `${ano}-${mes}-01`,
+                    [Op.lt]: `${ano}-${Number(mes) + 1}-01`
+                };
+            },
         };
         if (listaDeParametros.length > 0) {
             listaDeParametros.forEach(parametro => adicionaParametros[parametro]());
@@ -29,19 +36,6 @@ class DespesaServices extends Services {
                 where: {...where},
             }
         );
-    }
-    async pegaRegistrosPorMes(ano, mes) {
-        return database[this.nomeDoModelo].findAll(
-            {
-                attributes: ['descricao', 'valor', 'data', 'categoria'],
-                where: {
-                    data: {
-                        [Op.gte]: `${ano}-${mes}-01`,
-                        [Op.lt]: `${ano}-${Number(mes) + 1}-01`
-                    }
-                }
-            }
-        )
     }
     async pegaUmRegistro(id) {
         const registroEncontrado = await database[this.nomeDoModelo].findOne({

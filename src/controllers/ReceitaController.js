@@ -16,8 +16,8 @@ class ReceitaController {
     static async pegaReceitasPorMes(req, res, next) {
         try {
             validaParametrosObrigatorios(req.params, ['ano', 'mes']);
-            const { ano, mes } = req.params;
-            const receitasPorMes = await receitaServices.pegaRegistrosPorMes(ano, mes);
+            const parametrosDeBusca = receitaServices.validaBuscaDeReceitas({ mensal: req.params });
+            const receitasPorMes = await receitaServices.pegaTodosRegistros(parametrosDeBusca);
             return res.status(200).json(receitasPorMes);
         } catch (erro) {
             next(erro);
