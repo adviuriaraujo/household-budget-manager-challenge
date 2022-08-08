@@ -6,7 +6,7 @@ const despesaServices = new DespesaServices();
 class DespesaController {
     static async pegaTodasDespesas(req, res, next) {
         try {
-            const parametrosDeBusca = despesaServices.validaBuscaDeDespesas(req.query);
+            const parametrosDeBusca = despesaServices.validaBusca(req.query);
             const todasDespesas = await despesaServices.pegaTodosRegistros(parametrosDeBusca);
             return res.status(200).json(todasDespesas);
         } catch (erro) {
@@ -17,7 +17,7 @@ class DespesaController {
     static async pegaDespesasPorMes(req, res, next) {
         try {
             validaParametrosObrigatorios(req.params, ['ano', 'mes']);
-            const parametrosDeBusca = despesaServices.validaBuscaDeDespesas({ mensal: req.params });
+            const parametrosDeBusca = despesaServices.validaBusca({ mensal: req.params });
             const despesasPorMes = await despesaServices.pegaTodosRegistros(parametrosDeBusca);
             return res.status(200).json(despesasPorMes);
         } catch (erro) {

@@ -6,7 +6,7 @@ const receitaServices = new ReceitaServices();
 class ReceitaController {
     static async pegaTodasReceitas(req, res, next) {
         try {
-            const parametrosDeBusca = receitaServices.validaBuscaDeReceitas(req.query);
+            const parametrosDeBusca = receitaServices.validaBusca(req.query);
             const todasReceitas = await receitaServices.pegaTodosRegistros(parametrosDeBusca);
             return res.status(200).json(todasReceitas);
         } catch (erro) {
@@ -16,7 +16,7 @@ class ReceitaController {
     static async pegaReceitasPorMes(req, res, next) {
         try {
             validaParametrosObrigatorios(req.params, ['ano', 'mes']);
-            const parametrosDeBusca = receitaServices.validaBuscaDeReceitas({ mensal: req.params });
+            const parametrosDeBusca = receitaServices.validaBusca({ mensal: req.params });
             const receitasPorMes = await receitaServices.pegaTodosRegistros(parametrosDeBusca);
             return res.status(200).json(receitasPorMes);
         } catch (erro) {
