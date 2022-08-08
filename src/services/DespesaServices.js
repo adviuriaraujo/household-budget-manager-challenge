@@ -7,6 +7,21 @@ class DespesaServices extends Services {
     constructor(){
         super('Despesas');
     }
+    validaBuscaDeDespesas(parametrosDeRequisicao) {
+        const listaDeParametros = Object.keys(parametrosDeRequisicao);
+        const parametrosDeBusca = {};
+        const adicionaParametros = {
+            descricao: () => {
+                parametrosDeBusca.descricao = {
+                    [Op.like]: `%${parametrosDeRequisicao.descricao.toLowerCase()}%`
+                };
+            },
+        };
+        if (listaDeParametros.length > 0) {
+            listaDeParametros.forEach(parametro => adicionaParametros[parametro]());
+        }
+        return parametrosDeBusca;
+    }
     async pegaTodosRegistros(where = {}) {
         return database[this.nomeDoModelo].findAll(
             {

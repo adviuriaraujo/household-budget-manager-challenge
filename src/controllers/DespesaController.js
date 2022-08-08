@@ -1,4 +1,3 @@
-const { Op } = require('sequelize');
 const { DespesaServices } = require('../services');
 const { validaParametrosObrigatorios } = require('../validations/');
 
@@ -7,7 +6,7 @@ const despesaServices = new DespesaServices();
 class DespesaController {
     static async pegaTodasDespesas(req, res, next) {
         try {
-            const parametrosDeBusca = req.query.descricao ? { descricao: { [Op.like]: `%${req.query.descricao.toLowerCase()}%` } } : {};
+            const parametrosDeBusca = despesaServices.validaBuscaDeDespesas(req.query);
             const todasDespesas = await despesaServices.pegaTodosRegistros(parametrosDeBusca);
             return res.status(200).json(todasDespesas);
         } catch (erro) {

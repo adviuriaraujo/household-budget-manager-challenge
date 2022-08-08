@@ -6,6 +6,21 @@ class ReceitaServices extends Services {
     constructor() {
         super('Receitas');
     }
+    validaBuscaDeReceitas(parametrosDeRequisicao) {
+        const listaDeParametros = Object.keys(parametrosDeRequisicao);
+        const parametrosDeBusca = {};
+        const adicionaParametros = {
+            descricao: () => {
+                parametrosDeBusca.descricao = {
+                    [Op.like]: `%${parametrosDeRequisicao.descricao.toLowerCase()}%`
+                };
+            },
+        };
+        if (listaDeParametros.length > 0) {
+            listaDeParametros.forEach(parametro => adicionaParametros[parametro]());
+        }
+        return parametrosDeBusca;
+    }
     async verificaReceitasDuplicadas({ descricao, data }, id = null){
         const receitasComMesmaDescricao = await super.pegaTodosRegistros({
             [Op.and]: [
