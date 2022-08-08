@@ -30,6 +30,19 @@ class DespesaServices extends Services {
             }
         );
     }
+    async pegaRegistrosPorMes(ano, mes) {
+        return database[this.nomeDoModelo].findAll(
+            {
+                attributes: ['descricao', 'valor', 'data', 'categoria'],
+                where: {
+                    data: {
+                        [Op.gte]: `${ano}-${mes}-01`,
+                        [Op.lt]: `${ano}-${Number(mes) + 1}-01`
+                    }
+                }
+            }
+        )
+    }
     async pegaUmRegistro(id) {
         const registroEncontrado = await database[this.nomeDoModelo].findOne({
             attributes: ['descricao', 'valor', 'data', 'categoria'],

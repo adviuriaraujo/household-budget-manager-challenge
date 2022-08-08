@@ -13,6 +13,16 @@ class ReceitaController {
             next(erro);
         }
     }
+    static async pegaReceitasPorMes(req, res, next) {
+        try {
+            validaParametrosObrigatorios(req.params, ['ano', 'mes']);
+            const { ano, mes } = req.params;
+            const receitasPorMes = await receitaServices.pegaRegistrosPorMes(ano, mes);
+            return res.status(200).json(receitasPorMes);
+        } catch (erro) {
+            next(erro);
+        }
+    }
     static async pegaUmaReceita(req, res, next) {
         try {
             validaParametrosObrigatorios(req.params, ['id']);

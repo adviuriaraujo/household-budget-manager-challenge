@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const database = require('../models');
 const { NaoEncontradoError } = require('../errors');
 
@@ -12,6 +13,19 @@ class Services {
                 where: {...where},
             }
         );
+    }
+    async pegaRegistrosPorMes(ano, mes) {
+        return database[this.nomeDoModelo].findAll(
+            {
+                attributes: ['descricao', 'valor', 'data'],
+                where: {
+                    data: {
+                        [Op.gte]: `${ano}-${mes}-01`,
+                        [Op.lt]: `${ano}-${Number(mes) + 1}-01`
+                    }
+                }
+            }
+        )
     }
     async pegaUmRegistro(id) {
         const registroEncontrado = await database[this.nomeDoModelo].findOne({
