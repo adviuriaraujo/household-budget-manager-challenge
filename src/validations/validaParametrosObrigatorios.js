@@ -23,6 +23,19 @@ function verificaValoresValidos(valor, parametroObrigatorio) {
             const regexDataValida = /^[0-9]{4}-[01][0-9]-[0-3][0-9]$/g;
             if (typeof valor !== 'string' || !regexDataValida.test(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
             break;
+        case 'categoria':
+            const categoriasPermitidas = [
+                'Alimentação',
+                'Saúde',
+                'Moradia',
+                'Transporte',
+                'Educação',
+                'Lazer',
+                'Imprevistos',
+                'Outras',
+            ]
+            if (!categoriasPermitidas.includes(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
+            break;
         default:
             break;
     }

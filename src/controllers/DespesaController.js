@@ -27,7 +27,8 @@ class DespesaController {
     static async cadastraDespesa(req, res, next) {
         try {
             const novaDespesa = req.body;
-            validaParametrosObrigatorios(novaDespesa, ['descricao', 'valor', 'data']);
+            if (!novaDespesa.categoria) novaDespesa.categoria = 'Outras';
+            validaParametrosObrigatorios(novaDespesa, ['descricao', 'valor', 'data', 'categoria']);
             novaDespesa.descricao = novaDespesa.descricao.toLowerCase();
             await despesaServices.verificaDespesasDuplicadas(novaDespesa);
             const novaDespesaCadastrada = await despesaServices.criaRegistro(novaDespesa);
