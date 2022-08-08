@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { ReceitaServices } = require('../services');
 const { validaParametrosObrigatorios } = require('../validations/');
 
@@ -6,7 +7,8 @@ const receitaServices = new ReceitaServices();
 class ReceitaController {
     static async pegaTodasReceitas(req, res, next) {
         try {
-            const todasReceitas = await receitaServices.pegaTodosRegistros();
+            const parametrosDeBusca = req.query.descricao ? { descricao: { [Op.like]: `%${req.query.descricao.toLowerCase()}%` } } : {};
+            const todasReceitas = await receitaServices.pegaTodosRegistros(parametrosDeBusca);
             return res.status(200).json(todasReceitas);
         } catch (erro) {
             next(erro);
