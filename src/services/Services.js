@@ -17,9 +17,11 @@ class Services {
             },
             mensal: () => {
                 const { ano, mes } = parametrosDeRequisicao.mensal;
+                const mesFormatado = mes.length < 2 ? '0'.concat(mes) : mes;
+                const mesSeguinte = Number(mes) < 9 ? '0'.concat(`${Number(mes) + 1}`) : Number(mes) + 1;
                 parametrosDeBusca.data = {
-                    [Op.gte]: `${ano}-${mes}-01`,
-                    [Op.lt]: `${ano}-${Number(mes) + 1}-01`
+                    [Op.gte]: `${ano}-${mesFormatado}-01`,
+                    [Op.lt]: `${ano}-${mesSeguinte}-01`
                 };
             },
         };
@@ -35,19 +37,6 @@ class Services {
                 where: {...where},
             }
         );
-    }
-    async pegaRegistrosPorMes(ano, mes) {
-        return database[this.nomeDoModelo].findAll(
-            {
-                attributes: ['descricao', 'valor', 'data'],
-                where: {
-                    data: {
-                        [Op.gte]: `${ano}-${mes}-01`,
-                        [Op.lt]: `${ano}-${Number(mes) + 1}-01`
-                    }
-                }
-            }
-        )
     }
     async pegaUmRegistro(id) {
         const registroEncontrado = await database[this.nomeDoModelo].findOne({
@@ -76,7 +65,7 @@ class Services {
             'valor',
             { where: {...where} },
         );
-        return soma;
+        return soma ? soma : 0;
     }
 }
 

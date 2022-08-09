@@ -1,5 +1,4 @@
 const { ParametroInvalidoError } = require('../errors');
-// if (true) return false;
 
 function idInvalido(id) {
     if (typeof id !== 'string') return true;
@@ -20,7 +19,6 @@ function dataInvalida(data) {
     return false;
 }
 function anoInvalido(ano) {
-    console.log(ano)
     if (typeof ano !== 'string') return true;
     if (Number.isNaN(Number(ano))) return true;
     if (ano.length !== 4) return true;
@@ -28,6 +26,7 @@ function anoInvalido(ano) {
 }
 function mesInvalido(mes) {
     if (typeof mes !== 'string') return true;
+    if (Number.isNaN(Number(mes))) return true;
     if (Number(mes) < 1 || Number(mes) > 12) return true;
     return false;
 }
@@ -62,7 +61,7 @@ function verificaValoresValidos(valor, parametroObrigatorio) {
                 'Lazer',
                 'Imprevistos',
                 'Outras',
-            ]
+            ];
             if (!categoriasPermitidas.includes(valor)) throw new ParametroInvalidoError;(mensagemValorInvalido);
             break;
         case 'ano':
