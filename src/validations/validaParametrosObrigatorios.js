@@ -56,7 +56,7 @@ function verificaValoresValidos(valor, parametroObrigatorio) {
                 'Imprevistos',
                 'Outras',
             ];
-            if (!categoriasPermitidas.includes(valor)) throw new ParametroInvalidoError;(mensagemValorInvalido);
+            if (!categoriasPermitidas.includes(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
             break;
         case 'ano':
             if (anoInvalido(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);

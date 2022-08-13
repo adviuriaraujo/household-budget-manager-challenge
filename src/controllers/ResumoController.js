@@ -1,6 +1,5 @@
 const { ReceitaServices, DespesaServices } = require('../services');
 const { validaParametrosObrigatorios } = require('../validations/');
-// TODO: RECEITA -DESPESA E DESPESA POR CATEGORIA
 
 const receitaServices = new ReceitaServices();
 const despesaServices = new DespesaServices();
