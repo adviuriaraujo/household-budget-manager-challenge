@@ -1,31 +1,27 @@
 const { ParametroInvalidoError } = require('../errors');
 
 function idInvalido(id) {
-    if (typeof id !== 'string') return true;
+    if (isNaN(id)) return true;
     const regexIdValido = /^[0-9]+$/g
     if (!regexIdValido.test(id)) return true;
     return false;
 }
 function descricaoInvalida(descricao) {
-    if (typeof descricao !== 'string') return true;
     const regexStringValida = /^[A-Za-z0-9]+/g;
     if (!regexStringValida.test(descricao)) return true;
     return false;
 }
 function dataInvalida(data) {
-    if (typeof data !== 'string') return true;
     const regexDataValida = /^[0-9]{4}-[01][0-9]-[0-3][0-9]$/g;
     if (!regexDataValida.test(data)) return true;
     return false;
 }
 function anoInvalido(ano) {
-    if (typeof ano !== 'string') return true;
-    if (Number.isNaN(Number(ano))) return true;
+    if (isNaN(ano)) return true;
     if (ano.length !== 4) return true;
     return false;
 }
 function mesInvalido(mes) {
-    if (typeof mes !== 'string') return true;
     if (Number.isNaN(Number(mes))) return true;
     if (Number(mes) < 1 || Number(mes) > 12) return true;
     return false;

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test": "jest --silent",
     "test:ci": "npm run test -- --coverage"
   },
   "repository": {
@@ -34,6 +34,7 @@
   "devDependencies": {
     "jest": "^28.1.3",
     "nodemon": "^2.0.19",
+    "sequelize-mock": "^0.10.2",
     "supertest": "^6.2.4"
   }
 }
