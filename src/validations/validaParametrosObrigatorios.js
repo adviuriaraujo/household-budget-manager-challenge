@@ -30,9 +30,7 @@ function mesInvalido(mes) {
 function verificaValoresValidos(valor, parametroObrigatorio) {
     const mensagemValorInvalido = `É necessário fornecer um valor válido para '${parametroObrigatorio}'!`;
     const valoresInvalidos = [null, undefined, ''];
-    valoresInvalidos.forEach(valorInvalido => {
-        if (valor === valorInvalido) throw new ParametroInvalidoError(mensagemValorInvalido);
-    });
+    if (valoresInvalidos.includes(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
     switch (parametroObrigatorio) {
         case 'id':
             if (idInvalido(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);

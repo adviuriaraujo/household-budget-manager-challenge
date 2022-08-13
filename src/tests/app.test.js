@@ -12,6 +12,13 @@ describe('GET /receitas', () => {
         expect(res.statusCode).toBe(200);
         expect(res.body).toBeDefined();
     });
+    it('retorna erro interno se ocorrer erro inesperado na busca', async () => {
+        jest.spyOn(Model, 'findAll').mockImplementationOnce(() => Promise.reject(new Error()));
+        const res = await request(app)
+            .get('/receitas');
+        expect(res.statusCode).toBe(500);
+        expect(res.body.mensagem).toBe('Erro interno do servidor');
+    });
 });
 
 describe('GET /receitas/:ano/:mes', () => {
@@ -61,7 +68,7 @@ describe('GET /receitas/:id', () => {
             descricao: expect.any(String),
             valor: expect.any(Number),
             data: expect.any(String),
-        })
+        });
     });
     test.each([undefined, 1.75 , 'erro'])('retorna mensagem de parâmetro inválido', async (arg) => {
         const id = arg;
@@ -123,6 +130,92 @@ describe('POST /receitas', () => {
         expect(res.statusCode).toBe(400);
         expect(res.body.erro).toBe('ParametroInvalidoError');
         expect(res.body.mensagem).toBe('Esta receita já existe para este mês!');
+    });
+    test.each([[' ', 35.5, '2022-08-13', 'descricao'], ['mock', 'erro', '2022-08-13', 'valor'], ['mock', 35.5, 'erro', 'data']])(
+        'deve retornar erro se os parâmetros da receita forem inválidos',
+        async (descricao, valor, data, parametroObrigatorio) => {
+            const res = await request(app)
+                .post('/receitas')
+                .send({ descricao, valor, data })
+            expect(res.statusCode).toBe(400);
+            expect(res.body.erro).toBe('ParametroInvalidoError');
+            expect(res.body.mensagem).toBe(`É necessário fornecer um valor válido para '${parametroObrigatorio}'!`);
+        }
+    );
+    it('deve retornar erro se faltar um parâmetro obrigatório', async () => {
+        const novaReceita = { mock: 'mock' };
+        const res = await request(app)
+            .post('/receitas')
+            .send(novaReceita);
+        expect(res.statusCode).toBe(400);
+        expect(res.body.erro).toBe('ParametroInvalidoError');
+        expect(res.body.mensagem).toBe(`O parâmetro 'descricao' é obrigatório!`);
+    });
+});
+
+describe('PUT /receitas/:id', () => {
+    it('deve atualizar registro de receita com novos dados fornecidos', async () => {
+        const id = '1';
+        const receitaRegistrada = {
+            descricao: 'mock',
+            valor: 1,
+            data: '2022-03-03'
+        };
+        jest.spyOn(Model, 'findOne').mockImplementationOnce(() => Promise.resolve(receitaRegistrada));
+        const dadosAtualizados = { descricao: 'mock2', data: '2022-07-07' };
+        const receitaAtualizada = {
+            descricao: 'mock',
+            valor: 2,
+            data: '2022-03-03'
+        };
+        jest.spyOn(Model, 'findAll').mockImplementationOnce(() => Promise.resolve([]));
+        jest.spyOn(Model, 'update').mockImplementationOnce(() => Promise.resolve());
+        jest.spyOn(Model, 'findOne').mockImplementationOnce(() => Promise.resolve(receitaAtualizada));
+        const res = await request(app)
+            .put('/receitas/' + id)
+            .send(dadosAtualizados);
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toMatchObject({
+            descricao: expect.any(String),
+            valor: expect.any(Number),
+            data: expect.any(String),
+        });
+    });
+    test.each([{ data: '2022-03-21' }, { descricao: 'mock' }])(
+        'deve retornar erro se a atualização provocar uma duplicidade de receitas',
+        async (dadosAtualizados) => {
+            const id = '1';
+            const receitaRegistrada = {
+                descricao: 'mock',
+                valor: 1,
+                data: '2022-03-03'
+            };
+            jest.spyOn(Model, 'findOne').mockImplementationOnce(() => Promise.resolve(receitaRegistrada));
+            jest.spyOn(Model, 'findAll').mockImplementationOnce(() => Promise.resolve([receitaRegistrada]));
+            const res = await request(app)
+                .put('/receitas/' + id)
+                .send(dadosAtualizados);
+            expect(res.statusCode).toBe(400);
+            expect(res.body.erro).toBe('ParametroInvalidoError');
+            expect(res.body.mensagem).toBe('Esta receita já existe para este mês!');
+        }
+    );
+});
+
+describe('DELETE /receitas/:id', () => {
+    it('deve remover um registro de receita', async () => {
+        const id = '1';
+        const receitaRegistrada = {
+            descricao: 'mock',
+            valor: 1,
+            data: '2022-03-03'
+        };
+        jest.spyOn(Model, 'findOne').mockImplementationOnce(() => Promise.resolve(receitaRegistrada));
+        jest.spyOn(Model, 'destroy').mockImplementationOnce(() => Promise.resolve());
+        const res = await request(app)
+            .delete('/receitas/' + id);
+        expect(res.statusCode).toBe(200);
+        expect(res.body.mensagem).toBe(`Receita de id ${id} removida com sucesso!`);
     });
 });
 
