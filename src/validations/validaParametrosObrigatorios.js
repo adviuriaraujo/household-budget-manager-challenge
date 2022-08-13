@@ -1,27 +1,49 @@
 const { ParametroInvalidoError } = require('../errors');
 
+function idInvalido(id) {
+    if (isNaN(id)) return true;
+    const regexIdValido = /^[0-9]+$/g
+    if (!regexIdValido.test(id)) return true;
+    return false;
+}
+function descricaoInvalida(descricao) {
+    const regexStringValida = /^[A-Za-z0-9]+/g;
+    if (!regexStringValida.test(descricao)) return true;
+    return false;
+}
+function dataInvalida(data) {
+    const regexDataValida = /^[0-9]{4}-[01][0-9]-[0-3][0-9]$/g;
+    if (!regexDataValida.test(data)) return true;
+    return false;
+}
+function anoInvalido(ano) {
+    if (isNaN(ano)) return true;
+    if (ano.length !== 4) return true;
+    return false;
+}
+function mesInvalido(mes) {
+    if (Number.isNaN(Number(mes))) return true;
+    if (Number(mes) < 1 || Number(mes) > 12) return true;
+    return false;
+}
+
 function verificaValoresValidos(valor, parametroObrigatorio) {
     const mensagemValorInvalido = `É necessário fornecer um valor válido para '${parametroObrigatorio}'!`;
     const valoresInvalidos = [null, undefined, ''];
-    valoresInvalidos.forEach(valorInvalido => {
-        if (valor === valorInvalido) throw new ParametroInvalidoError(mensagemValorInvalido);
-    });
+    if (valoresInvalidos.includes(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
     switch (parametroObrigatorio) {
         case 'id':
-            const regexIdValido = /^[0-9]+$/g
-            if (typeof valor !== 'string' || !regexIdValido.test(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
+            if (idInvalido(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
             break;
         case 'descricao':
-            const regexStringValida = /^[A-Za-z0-9]+/g;
-            if (typeof valor !== 'string' || !regexStringValida.test(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
+            if (descricaoInvalida(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
             valor = valor.toLowerCase();
             break;
         case 'valor':
             if (typeof valor !== 'number') throw new ParametroInvalidoError(mensagemValorInvalido);
             break;
         case 'data':
-            const regexDataValida = /^[0-9]{4}-[01][0-9]-[0-3][0-9]$/g;
-            if (typeof valor !== 'string' || !regexDataValida.test(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
+            if (dataInvalida(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
             break;
         case 'categoria':
             const categoriasPermitidas = [
@@ -33,8 +55,14 @@ function verificaValoresValidos(valor, parametroObrigatorio) {
                 'Lazer',
                 'Imprevistos',
                 'Outras',
-            ]
+            ];
             if (!categoriasPermitidas.includes(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
+            break;
+        case 'ano':
+            if (anoInvalido(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
+            break;
+        case 'mes':
+            if (mesInvalido(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
             break;
         default:
             break;

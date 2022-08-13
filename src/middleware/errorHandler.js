@@ -5,7 +5,7 @@ function errorHandler(error, req, res, next) {
     if(error.name === 'NaoEncontradoError') status = 404;
     return res
         .status(status)
-        .json({ erro: error.name || 'Erro interno do servidor', mensagem: error.message });
+        .json({ erro: error.name, mensagem: error.message || 'Erro interno do servidor' });
 }
 
 module.exports = { errorHandler };
