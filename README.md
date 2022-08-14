@@ -57,6 +57,18 @@ $ npm run dev
   ```bash
   GET /receitas
   ```
+  optional search by description:
+  ```bash
+  GET /receitas?descricao=DESCRIPTION
+  ```
+  
+</details>
+<details>
+  <summary>Get all income records on a specific month</summary>
+  
+  ```bash
+  GET /receitas/:ano/:mes
+  ```
   
 </details>
 <details>
@@ -109,15 +121,27 @@ $ npm run dev
 ### Expenses Request Examples
 
 <details>
-  <summary>Get all income records</summary>
+  <summary>Get all expenses records</summary>
   
   ```bash
   GET /despesas
   ```
+  optional search by description:
+  ```bash
+  GET /despesas?descricao=DESCRIPTION
+  ```
   
 </details>
 <details>
-  <summary>Get a single income record</summary>
+  <summary>Get all expenses records on a specific month</summary>
+  
+  ```bash
+  GET /despesas/:ano/:mes
+  ```
+  
+</details>
+<details>
+  <summary>Get a single expense record</summary>
   
   ```bash
   GET /despesas/:id
@@ -125,7 +149,7 @@ $ npm run dev
   
 </details>
 <details>
-  <summary>Create a new income record</summary>
+  <summary>Create a new expense record</summary>
   
   ```bash
   POST /despesas
@@ -135,13 +159,14 @@ $ npm run dev
   {
     "descricao": "conta de luz",
     "valor": 300.97,
+    "categoria": "Moradia",
     "data": "2022-05-08"
   }
   ```
   
 </details>
 <details>
-  <summary>Update a single income record</summary>
+  <summary>Update a single expense record</summary>
   
   ```bash
   PUT /despesas/:id
@@ -156,7 +181,7 @@ $ npm run dev
   
 </details>
 <details>
-  <summary>Remove a single income record</summary>
+  <summary>Remove a single expense record</summary>
   
   ```bash
   DELETE /despesas/:id
@@ -164,6 +189,15 @@ $ npm run dev
   
 </details>
 
+### Summary Request Examples
+<details>
+  <summary>Get a summary of all income, total expenses, balance and expenses by category on a specific month</summary>
+  
+  ```bash
+  GET /resumo/:ano/:mes
+  ```
+  
+</details>
 
 ### PT-BR
 ## Índice
@@ -216,6 +250,18 @@ $ npm run dev
   
   ```bash
   GET /receitas
+  ```
+  Pesquisa opcional por descrição:
+  ```bash
+  GET /receitas?descricao=DESCRIÇÃO
+  ```
+  
+</details>
+<details>
+  <summary>Pega todos registros de receitas em um mês específico</summary>
+  
+  ```bash
+  GET /receitas/:ano/:mes
   ```
   
 </details>
@@ -274,6 +320,18 @@ $ npm run dev
   ```bash
   GET /despesas
   ```
+  Pesquisa opcional por descrição:
+  ```bash
+  GET /despesas?descricao=DESCRIÇÃO
+  ```
+  
+</details>
+<details>
+  <summary>Pega todos os registros de despesas em um mês específico</summary>
+  
+  ```bash
+  GET /despesas/:ano/:mes
+  ```
   
 </details>
 <details>
@@ -295,6 +353,7 @@ $ npm run dev
   {
     "descricao": "conta de luz",
     "valor": 300.97,
+    "categoria": "Moradia",
     "data": "2022-05-08"
   }
   ```
@@ -320,6 +379,16 @@ $ npm run dev
   
   ```bash
   DELETE /despesas/:id
+  ```
+  
+</details>
+
+### Examplos de Requisição de Resumo
+<details>
+  <summary>Pega resumo de todas receitas, despesas, saldo e despesas por categoria em um mês específico</summary>
+  
+  ```bash
+  GET /resumo/:ano/:mes
   ```
   
 </details>
