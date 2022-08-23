@@ -1,51 +1,32 @@
 const { ParametroInvalidoError } = require('../errors');
 
-function idInvalido(id) {
-    if (isNaN(id)) return true;
-    const regexIdValido = /^[0-9]+$/g
-    if (!regexIdValido.test(id)) return true;
-    return false;
-}
-function descricaoInvalida(descricao) {
-    const regexStringValida = /^[A-Za-z0-9]+/g;
-    if (!regexStringValida.test(descricao)) return true;
-    return false;
-}
-function dataInvalida(data) {
-    const regexDataValida = /^[0-9]{4}-[01][0-9]-[0-3][0-9]$/g;
-    if (!regexDataValida.test(data)) return true;
-    return false;
-}
-function anoInvalido(ano) {
-    if (isNaN(ano)) return true;
-    if (ano.length !== 4) return true;
-    return false;
-}
-function mesInvalido(mes) {
-    if (Number.isNaN(Number(mes))) return true;
-    if (Number(mes) < 1 || Number(mes) > 12) return true;
-    return false;
-}
-
 function verificaValoresValidos(valor, parametroObrigatorio) {
     const mensagemValorInvalido = `É necessário fornecer um valor válido para '${parametroObrigatorio}'!`;
-    const valoresInvalidos = [null, undefined, ''];
-    if (valoresInvalidos.includes(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
-    switch (parametroObrigatorio) {
-        case 'id':
-            if (idInvalido(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
-            break;
-        case 'descricao':
-            if (descricaoInvalida(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
-            valor = valor.toLowerCase();
-            break;
-        case 'valor':
-            if (typeof valor !== 'number') throw new ParametroInvalidoError(mensagemValorInvalido);
-            break;
-        case 'data':
-            if (dataInvalida(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
-            break;
-        case 'categoria':
+    const valoresInvalidosGerais = [null, undefined, ''];
+    if (valoresInvalidosGerais.includes(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
+    const valoresInvalidosDoParametro = {
+        'id': (id) => {
+            if (isNaN(id)) return true;
+            const regexIdValido = /^[0-9]+$/g
+            if (!regexIdValido.test(id)) return true;
+            return false;
+        },
+        'descricao': (descricao) => {
+            if (typeof descricao !== 'string') return true;
+            const regexStringValida = /^[A-Za-z0-9]+/g;
+            if (!regexStringValida.test(descricao)) return true;
+            return false;
+        },
+        'valor': (valor) => {
+            if (typeof valor !== 'number') return true;
+            return false;
+        },
+        'data': (data) => {
+            const regexDataValida = /^[0-9]{4}-[01][0-9]-[0-3][0-9]$/g;
+            if (!regexDataValida.test(data)) return true;
+            return false;
+        },
+        'categoria': (categoria) => {
             const categoriasPermitidas = [
                 'Alimentação',
                 'Saúde',
@@ -56,17 +37,25 @@ function verificaValoresValidos(valor, parametroObrigatorio) {
                 'Imprevistos',
                 'Outras',
             ];
-            if (!categoriasPermitidas.includes(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
-            break;
-        case 'ano':
-            if (anoInvalido(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
-            break;
-        case 'mes':
-            if (mesInvalido(valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
-            break;
-        default:
-            break;
-    }
+            if (!categoriasPermitidas.includes(categoria)) return true;
+            return false;
+        },
+        'ano': (ano) => {
+            if (isNaN(ano)) return true;
+            if (ano.length !== 4) return true;
+            return false;  
+        },
+        'mes': (mes) => {
+            if (Number.isNaN(Number(mes))) return true;
+            if (Number(mes) < 1 || Number(mes) > 12) return true;
+            return false;
+        },
+        'nome': (nome) => {
+            if (nome.length < 2) return true;
+            return false
+        },
+    };
+    if (valoresInvalidosDoParametro[parametroObrigatorio](valor)) throw new ParametroInvalidoError(mensagemValorInvalido);
 }
 
 function validaParametrosObrigatorios(parametros, parametrosObrigatorios) {

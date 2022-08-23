@@ -5,6 +5,13 @@ const receitaServices = new ReceitaServices();
 const despesaServices = new DespesaServices();
 
 class ResumoController {
+    static async opcoes(req, res, next) {
+        const headersPermitidos = ['Accept','Content-Type', 'Access-Control-Allow-Origin'];
+        res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+        res.set('Access-Control-Allow-Headers', headersPermitidos)
+        res.status(204)
+        res.end()
+    }
     static async pegaResumoDoMes(req, res, next) {
         try {
             validaParametrosObrigatorios(req.params, ['ano', 'mes']);

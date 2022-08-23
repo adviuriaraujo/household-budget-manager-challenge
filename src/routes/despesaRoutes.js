@@ -4,6 +4,7 @@ const { DespesaController } = require('../controllers');
 const router = Router();
 
 router
+    .options('/*', DespesaController.opcoes)
     .get('/despesas', DespesaController.pegaTodasDespesas)
     .get('/despesas/:id', DespesaController.pegaUmaDespesa)
     .get('/despesas/:ano/:mes', DespesaController.pegaDespesasPorMes)

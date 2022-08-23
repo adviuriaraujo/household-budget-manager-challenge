@@ -4,6 +4,13 @@ const { validaParametrosObrigatorios } = require('../validations/');
 const receitaServices = new ReceitaServices();
 
 class ReceitaController {
+    static async opcoes(req, res, next) {
+        const headersPermitidos = ['Accept','Content-Type', 'Access-Control-Allow-Origin'];
+        res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+        res.set('Access-Control-Allow-Headers', headersPermitidos)
+        res.status(204)
+        res.end()
+    }
     static async pegaTodasReceitas(req, res, next) {
         try {
             const parametrosDeBusca = receitaServices.validaBusca(req.query);
